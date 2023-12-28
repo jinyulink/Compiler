@@ -1,0 +1,69 @@
+command: 
+flex 檔名
+yacc -d 檔名
+gcc lex.yy.c y.tab.c -lfl
+
+======================================
+
+#!/bin/bash
+
+bison -d -o main.tab.c main.y
+gcc -c -g -I.. main.tab.c
+
+flex -o main.yy.c main.l
+gcc -c -g -I.. main.yy.c
+
+gcc -o a.out main.tab.o main.yy.o -lfl
+
+=====================================
+
+
+Regular Expression Syntax Summary:
+
+1. Literals:
+   - a, b, 1, 2, etc. (Matches the exact character)
+
+2. Character Classes:
+   - [abc]: Matches any one of 'a', 'b', or 'c'.
+   - [^abc]: Matches any character not in the set 'a', 'b', or 'c'.
+   - [a-z]: Matches any character from 'a' to 'z'.
+   - [A-Z]: Matches any character from 'A' to 'Z'.
+   - [0-9]: Matches any digit.
+   - [a-zA-Z]: Matches any alphabet character.
+
+3. Predefined Character Classes:
+   - .: Matches any character except newline.
+   - \d: Matches any digit. Equivalent to [0-9].
+   - \D: Matches any non-digit. Equivalent to [^0-9].
+   - \w: Matches any word character (alphanumeric & underscore). Equivalent to [a-zA-Z0-9_].
+   - \W: Matches any non-word character. Equivalent to [^\w].
+   - \s: Matches any whitespace character (space, tab, newline).
+   - \S: Matches any non-whitespace character.
+
+4. Quantifiers:
+   - *: Matches 0 or more repetitions of the preceding element.
+   - +: Matches 1 or more repetitions of the preceding element.
+   - ?: Matches 0 or 1 repetition of the preceding element.
+   - {n}: Matches exactly n repetitions of the preceding element.
+   - {n,}: Matches n or more repetitions of the preceding element.
+   - {n,m}: Matches between n and m repetitions of the preceding element.
+
+5. Anchors and Boundaries:
+   - ^: Matches the start of a string.
+   - $: Matches the end of a string.
+   - : Matches a word boundary.
+   - \B: Matches a non-word boundary.
+
+6. Grouping and Alternation:
+   - (abc): Matches the sequence 'abc'.
+   - a|b: Matches either 'a' or 'b'.
+   - (a|b)c: Matches either 'ac' or 'bc'.
+
+7. Escape Characters:
+   - \: Used to escape special characters.
+
+8. Lookahead and Lookbehind:
+   - (?=...): Positive lookahead assertion.
+   - (?!...): Negative lookahead assertion.
+   - (?<=...): Positive lookbehind assertion.
+   - (?<!...): Negative lookbehind assertion.

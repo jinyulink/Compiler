@@ -1,0 +1,25 @@
+*	包含零個到無限多個
++	包含一個到無限多個
+?	包含零個或一個
+[]	出現集合，在集合中擇一，如果是數字或大小寫英文的連續區間，請用 「-」 隔開
+{}	設定重複次數，如果是一個區間，用逗號隔開
+()	群組的概念，裏頭可接其他 RE
+\	跳脫字元，當用到如小數點的狀況，這樣才能把字元挑出來，還有其他如換行、tab
+^	當在 [] 內時，表示排除；放在開頭，表示一行的開頭
+$	放在結尾，表示一行的結尾
+
+flex test.l
+gcc yy.lex.c -o test
+./test < input.txt
+
+
+int yylex(void)	call to invoke lexer, returns token
+char *yytext	pointer to matched string
+yyleng	length of matched string
+yylval	value associated with token
+int yywrap(void)	wrapup, return 1 if done, 0 if not done
+FILE *yyout	output file
+FILE *yyin	input file
+INITIAL	initial start condition
+BEGIN condition	switch start condition
+ECHO	write matched string
